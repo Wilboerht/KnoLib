@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Search, Filter, Clock, Star, ArrowRight, BookOpen, Code, Users, Zap, Tag, Calendar } from "lucide-react";
+import { Search, Filter, Clock, Star, ArrowRight, Calendar } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

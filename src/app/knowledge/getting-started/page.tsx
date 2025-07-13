@@ -2,9 +2,8 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Search, ArrowRight, Clock, User, Calendar, BookOpen, Zap } from "lucide-react";
+import { Search, ArrowRight, Clock, BookOpen, Zap, User, Calendar } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const articles = [

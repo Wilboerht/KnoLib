@@ -2,9 +2,8 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Search, Filter, ArrowRight, Clock, User, Calendar, BookOpen, Tag } from "lucide-react";
+import { Search, Clock, BookOpen } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const allArticles = [

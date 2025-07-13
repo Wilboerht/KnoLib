@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { BookOpen, Lightbulb, Heart } from "lucide-react";
+
 import { Container } from "@/components/ui/container";
 
 export function Features() {
@@ -59,59 +59,28 @@ export function Features() {
             </div>
           </motion.div>
 
-          {/* Key Principles */}
-          <motion.div
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">开放分享</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                知识因分享而增值，每一次分享都让知识变得更有价值
-              </p>
-            </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Lightbulb className="w-8 h-8 text-purple-600 dark:text-purple-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">深度交流</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                思考因交流而深化，在对话中发现新的思维角度
-              </p>
-            </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 text-green-600 dark:text-green-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">持续成长</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                在分享与交流的循环中，实现个人和社区的共同成长
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Personal Touch */}
+          {/* Personal Philosophy */}
           <motion.div
             className="mt-16 text-center"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="bg-gray-50 dark:bg-slate-800/50 rounded-2xl p-8">
-              <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 mb-4">
-                "知识因分享而增值，思考因交流而深化。<br />
-                这里不是为了展示我知道多少，而是为了与你一起探索未知。"
-              </blockquote>
-              <cite className="text-gray-500 dark:text-gray-400">— Wilboerht</cite>
+            <div className="relative inline-block">
+              {/* Subtle background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-950/10 dark:to-purple-950/10 rounded-2xl transform rotate-1"></div>
+              <div className="relative bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-slate-700/50 rounded-2xl px-8 py-6">
+                <div className="text-3xl text-blue-300 dark:text-blue-700 mb-2">&ldquo;</div>
+                <blockquote className="text-xl font-dingtalk-jinbu font-light text-gray-800 dark:text-gray-200 leading-relaxed mb-4">
+                  知识因分享而增值
+                  <span className="block text-gray-600 dark:text-gray-400">思考因交流而深化</span>
+                </blockquote>
+                <div className="w-12 h-px bg-gradient-to-r from-blue-400 to-purple-400 mx-auto mb-3"></div>
+                <cite className="text-sm text-gray-500 dark:text-gray-500 font-medium">Wilboerht</cite>
+              </div>
             </div>
           </motion.div>
         </div>

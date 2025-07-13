@@ -15,7 +15,6 @@ import {
   EmailIcon,
   PhoneIcon,
   ClockIcon,
-  LocationIcon,
   SendIcon
 } from "@/components/ui/icons";
 
@@ -273,37 +272,16 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Office Locations */}
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-                Global Presence
-              </h3>
-              <div className="space-y-6">
-                {offices.map((office, index) => (
-                  <motion.div
-                    key={office.city}
-                    className="p-6 bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm rounded-lg border border-white/30 dark:border-slate-600/30"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
-                    <div className="flex items-start space-x-3">
-                      <LocationIcon className="w-5 h-5 text-gray-900 dark:text-white mt-1 flex-shrink-0" size={20} />
-                      <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
-                          {office.city}
-                        </h4>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
-                          {office.address}<br />
-                          {office.zipcode}
-                        </p>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm">
-                          {office.phone} ({office.timezone})
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+              {/* Platform Info */}
+              <div className="bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm rounded-lg border border-white/30 dark:border-slate-600/30 p-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                  About KnoLib
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  KnoLib is a personal knowledge sharing platform created to help individuals
+                  organize, share, and grow their knowledge. Built with passion for learning
+                  and sharing insights with the community.
+                </p>
               </div>
             </motion.div>
           </div>

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Search, BookOpen, Users, Zap, ArrowRight, FileText, Code, MessageSquare } from "lucide-react";
+import { Search, BookOpen, Users, Zap, FileText, Code, MessageSquare } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -113,7 +113,6 @@ const stats = [
 
 export default function KnowledgePage() {
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [selectedFilter, setSelectedFilter] = React.useState("all");
 
   return (
     <div className="min-h-screen pt-16 sm:pt-20">
@@ -287,7 +286,7 @@ export default function KnowledgePage() {
                 Need Help?
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Can't find what you're looking for? Get help from our community or support team.
+                Can&apos;t find what you&apos;re looking for? Get help from our community or support team.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href="/knowledge/search">

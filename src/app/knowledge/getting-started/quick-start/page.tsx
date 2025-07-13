@@ -79,7 +79,7 @@ export default function QuickStartPage() {
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Start exploring KnoLib's knowledge base and resources directly through the platform.
+                Start exploring KnoLib&apos;s knowledge base and resources directly through the platform.
               </p>
               <div className="bg-gray-50 dark:bg-slate-800 rounded-lg p-4">
                 <code className="text-sm text-gray-800 dark:text-gray-200">
