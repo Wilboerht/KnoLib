@@ -18,8 +18,8 @@ import { AllDocsIcon } from "@/components/ui/all-docs-icon";
 const features = [
   {
     icon: AllDocsIcon,
-    title: "知识库管理",
-    description: "集中管理和组织团队知识资产，构建结构化的企业知识体系，让知识沉淀更有价值。",
+    title: "知识管理",
+    description: "实用的个人知识管理工具，利用科学的信息组织方法，将学习与思考的成果系统化整理。",
     color: "blue"
   },
   {
@@ -31,25 +31,25 @@ const features = [
   {
     icon: Users,
     title: "知识协作网络",
-    description: "连接组织内的知识专家，促进知识分享与协作，构建学习型组织文化。",
+    description: "定期与同行交流学习心得，分享实践经验，在知识碰撞中获得新的启发与成长。",
     color: "green"
   },
   {
     icon: Brain,
     title: "个性化学习路径",
-    description: "根据个人角色和发展需求，定制化学习路径，实现知识的精准传递和能力提升。",
+    description: "根据个人兴趣和发展方向，制定专属的学习计划，让每一步学习都更有针对性。",
     color: "yellow"
   },
   {
     icon: Award,
     title: "知识贡献激励",
-    description: "建立知识贡献评估体系，激励知识分享行为，让每个人都成为知识的创造者。",
+    description: "通过持续的知识输出与分享，不断完善个人知识体系，在帮助他人的同时提升自己。",
     color: "cyan"
   },
   {
     icon: MessageSquare,
     title: "知识问答社区",
-    description: "构建活跃的知识问答社区，促进经验交流与问题解决，让知识在互动中增值。",
+    description: "构建开放的学习交流空间，在问答互动中深化理解，让知识在分享中不断增值。",
     color: "pink"
   }
 ];
@@ -77,11 +77,11 @@ export function Features() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl">
-            构建企业知识生态
+            构建个人知识体系
           </h2>
           <p className="mt-3 text-base text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
-            全方位的知识管理平台，让组织知识资产得到有效沉淀、传承与创新，
-            助力团队持续学习与成长。
+            全方位的个人知识管理平台，让学习过程中的思考与收获得到有效沉淀，
+            助力个人持续学习与成长。
           </p>
         </motion.div>
 

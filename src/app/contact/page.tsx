@@ -24,49 +24,27 @@ const contactMethods = [
   {
     icon: MessageIcon,
     title: "Knowledge Sharing",
-    description: "Learn how KnoLib can transform your organization's knowledge management",
+    description: "Learn how KnoLib can help with your personal knowledge management",
     contact: "hello@knolib.com",
     action: "Start Sharing"
   },
   {
     icon: SupportIcon,
     title: "Technical Support",
-    description: "24/7 technical support for KnoLib platform users",
+    description: "Technical support for KnoLib platform users",
     contact: "support@knolib.com",
     action: "Get Support"
   },
   {
     icon: PartnersIcon,
-    title: "Enterprise Partnerships",
-    description: "Explore enterprise partnerships and integration opportunities",
+    title: "Collaboration",
+    description: "Explore collaboration and knowledge sharing opportunities",
     contact: "partners@knolib.com",
-    action: "Partner With Us"
+    action: "Collaborate"
   }
 ];
 
-const offices = [
-  {
-    city: "San Francisco",
-    address: "123 Knowledge Hub, Suite 400",
-    zipcode: "San Francisco, CA 94105",
-    phone: "+1 (555) 123-4567",
-    timezone: "PST"
-  },
-  {
-    city: "New York",
-    address: "456 Learning Center, Floor 25",
-    zipcode: "New York, NY 10013",
-    phone: "+1 (555) 987-6543",
-    timezone: "EST"
-  },
-  {
-    city: "London",
-    address: "789 Innovation Quarter, Level 15",
-    zipcode: "London E14 5AB, UK",
-    phone: "+44 20 7123 4567",
-    timezone: "GMT"
-  }
-];
+// Personal platform - no physical offices needed
 
 export default function ContactPage() {
   const [formData, setFormData] = React.useState({
@@ -353,20 +331,20 @@ export default function ContactPage() {
           <div className="max-w-3xl mx-auto">
             {[
               {
-                question: "How quickly can we implement KnoLib?",
-                answer: "Most KnoLib implementations can begin within 1-2 weeks of contract signing. Our team will work with you to migrate existing knowledge bases and ensure a smooth onboarding process for your team."
+                question: "How do I get started with KnoLib?",
+                answer: "Getting started with KnoLib is simple! Just browse the knowledge base, explore the articles, and start learning. You can access most content without registration and begin building your personal knowledge journey immediately."
               },
               {
-                question: "Does KnoLib integrate with our existing systems?",
-                answer: "Yes, KnoLib provides robust API integrations and can connect with your existing knowledge management systems, collaboration tools, and enterprise software. Our technical team will assess your requirements during the consultation."
+                question: "Can I contribute my own knowledge to KnoLib?",
+                answer: "Absolutely! KnoLib encourages knowledge sharing. You can contribute articles, share insights, and help build the community knowledge base. Contact us to learn more about becoming a contributor."
               },
               {
-                question: "What kind of support and training do you provide?",
-                answer: "We offer 24/7 technical support for enterprise customers, along with dedicated success managers, comprehensive training programs, and extensive documentation to help your team maximize knowledge sharing effectiveness."
+                question: "What kind of content can I find on KnoLib?",
+                answer: "KnoLib features a wide range of content including technical tutorials, learning guides, best practices, and personal insights. The platform covers various topics to support continuous learning and professional development."
               },
               {
-                question: "Is there a free trial for KnoLib?",
-                answer: "Yes, we offer a 30-day free trial with full access to KnoLib's knowledge sharing features. No credit card required to get started exploring how KnoLib can transform your organization's knowledge management."
+                question: "Is KnoLib free to use?",
+                answer: "Yes, KnoLib is free to access and use. Most content is available without registration, making it easy to start your learning journey and explore the knowledge base."
               }
             ].map((faq, index) => (
               <motion.div

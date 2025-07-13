@@ -10,11 +10,11 @@ import Link from "next/link";
 const articles = [
   {
     title: "Introduction to KnoLib",
-    description: "Welcome to KnoLib, your comprehensive enterprise knowledge sharing platform. Learn about our core features and how to get started.",
+    description: "Welcome to KnoLib, your comprehensive personal knowledge sharing platform. Learn about our core features and how to get started.",
     href: "/knowledge/getting-started/introduction",
     readTime: "5 min",
     lastUpdated: "2 days ago",
-    author: "KnoLib Team",
+    author: "Wilboerht",
     difficulty: "Beginner",
     featured: true
   },
@@ -24,7 +24,7 @@ const articles = [
     href: "/knowledge/getting-started/quick-start",
     readTime: "8 min",
     lastUpdated: "1 week ago",
-    author: "KnoLib Team",
+    author: "Wilboerht",
     difficulty: "Beginner",
     featured: true
   },
@@ -34,7 +34,7 @@ const articles = [
     href: "/knowledge/getting-started/concepts",
     readTime: "12 min",
     lastUpdated: "3 days ago",
-    author: "KnoLib Team",
+    author: "Wilboerht",
     difficulty: "Beginner",
     featured: false
   },
@@ -44,7 +44,7 @@ const articles = [
     href: "/knowledge/getting-started/installation",
     readTime: "15 min",
     lastUpdated: "1 week ago",
-    author: "Technical Team",
+    author: "Wilboerht",
     difficulty: "Beginner",
     featured: false
   },

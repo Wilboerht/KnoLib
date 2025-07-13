@@ -21,12 +21,12 @@ const features = [
   {
     icon: BookOpen,
     title: "Knowledge Management",
-    description: "Centralize and organize your team's knowledge in one accessible platform."
+    description: "Centralize and organize your personal knowledge in one accessible platform."
   },
   {
     icon: Users,
-    title: "Team Collaboration",
-    description: "Enable seamless collaboration with real-time editing and commenting features."
+    title: "Knowledge Sharing",
+    description: "Share your insights and learn from others with easy publishing features."
   },
   {
     icon: Zap,
@@ -35,8 +35,8 @@ const features = [
   },
   {
     icon: Shield,
-    title: "Enterprise Security",
-    description: "Bank-level security with role-based access control and audit trails."
+    title: "Secure & Private",
+    description: "Keep your knowledge safe with privacy controls and secure access."
   },
   {
     icon: Clock,
@@ -54,11 +54,11 @@ export default function IntroductionPage() {
   return (
     <DocLayout
       title="Introduction to KnoLib"
-      description="Welcome to KnoLib, your comprehensive enterprise knowledge sharing platform. Learn about our core features and how to get started."
+      description="Welcome to KnoLib, your comprehensive personal knowledge sharing platform. Learn about our core features and how to get started."
       breadcrumbs={breadcrumbs}
       lastUpdated="December 15, 2024"
       readTime="10 min read"
-      author="KnoLib Team"
+      author="Wilboerht"
       difficulty="Beginner"
       tableOfContents={tableOfContents}
       nextPage={{ title: "Quick Start Guide", href: "/knowledge/getting-started/quick-start" }}
@@ -69,14 +69,14 @@ export default function IntroductionPage() {
             What is KnoLib?
           </h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                KnoLib is an enterprise-grade knowledge sharing platform designed to help organizations 
-                centralize, organize, and share their collective knowledge. It combines the power of 
-                modern collaboration tools with intelligent search capabilities to create a comprehensive 
-                knowledge ecosystem for your team.
+                KnoLib is a personal knowledge sharing platform designed to help individuals
+                centralize, organize, and share their learning journey. It combines the power of
+                modern tools with intelligent search capabilities to create a comprehensive
+                personal knowledge ecosystem.
               </p>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Whether you&apos;re documenting processes, sharing best practices, or building a comprehensive
-                knowledge base, KnoLib provides the tools and infrastructure to make knowledge sharing 
+                Whether you&apos;re documenting learning notes, sharing insights, or building a comprehensive
+                knowledge base, KnoLib provides the tools and infrastructure to make knowledge sharing
                 seamless and effective.
               </p>
               
@@ -120,25 +120,25 @@ export default function IntroductionPage() {
             Who Should Use KnoLib
           </h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                KnoLib is designed for organizations of all sizes that want to improve their knowledge 
-                management and collaboration processes:
+                KnoLib is designed for individuals who want to improve their personal knowledge
+                management and learning processes:
               </p>
               <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                 <li className="flex items-start">
                   <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-                  <span><strong>Enterprise Teams:</strong> Large organizations looking to centralize knowledge across departments</span>
+                  <span><strong>学习者:</strong> 希望系统化整理学习笔记和知识的个人</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-                  <span><strong>Startups & SMBs:</strong> Growing companies that need scalable knowledge management solutions</span>
+                  <span><strong>知识工作者:</strong> 需要管理大量信息和文档的专业人士</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-                  <span><strong>Remote Teams:</strong> Distributed teams requiring centralized access to information</span>
+                  <span><strong>内容创作者:</strong> 希望分享知识和经验的博主、作者</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
-                  <span><strong>Educational Institutions:</strong> Schools and universities managing educational content</span>
+                  <span><strong>终身学习者:</strong> 持续学习和成长的个人</span>
                 </li>
               </ul>
             </section>

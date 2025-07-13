@@ -1,15 +1,15 @@
-# All Docs for Growing Skills
+# KnoLib - Personal Knowledge Sharing Platform
 
-A modern, enterprise-grade knowledge sharing platform built with Next.js, TypeScript, and Tailwind CSS. Inspired by Palantir's design philosophy, this platform empowers teams with comprehensive learning resources, documentation, and professional development tools.
+A modern, personal knowledge sharing platform built with Next.js, TypeScript, and Tailwind CSS. Inspired by Palantir's design philosophy, this platform empowers individuals with comprehensive learning resources, documentation, and personal development tools.
 
 ## 🚀 Features
 
 - **Knowledge Management**: Comprehensive documentation and learning resource platform
 - **Modern Tech Stack**: Built with Next.js 15, React 19, TypeScript, and Tailwind CSS
-- **Enterprise Design**: Professional, clean design inspired by Palantir's aesthetic
+- **Professional Design**: Clean, minimalist design inspired by Palantir's aesthetic
 - **Smart Search**: AI-powered search and content discovery capabilities
-- **Learning Paths**: Personalized skill development and certification tracking
-- **Community Features**: Expert networks, forums, and collaborative learning
+- **Learning Paths**: Personalized skill development and knowledge tracking
+- **Sharing Features**: Open knowledge sharing and collaborative learning
 - **Performance Optimized**: Fast loading times with code splitting and image optimization
 - **SEO Ready**: Complete SEO optimization with meta tags, structured data, and sitemap
 - **Accessibility**: WCAG compliant with proper semantic HTML and ARIA labels
@@ -30,7 +30,7 @@ A modern, enterprise-grade knowledge sharing platform built with Next.js, TypeSc
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd enterprise-website
+cd knolib
 ```
 
 2. Install dependencies:
@@ -149,4 +149,4 @@ This project is licensed under the MIT License.
 
 ## 📞 Support
 
-For support, email support@enterprise.com or visit our contact page.
+For support, email support@knolib.com or visit our contact page.

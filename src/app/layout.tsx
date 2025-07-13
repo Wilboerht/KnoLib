@@ -30,10 +30,10 @@ const dingTalkSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "KnoLib - Enterprise Knowledge Sharing Platform",
+  title: "KnoLib - Personal Knowledge Sharing Platform",
   description: "Your comprehensive knowledge library for continuous learning and professional growth. Discover, learn, and excel with KnoLib.",
-  keywords: ["knowledge sharing", "enterprise platform", "learning", "documentation", "collaboration"],
-  authors: [{ name: "KnoLib Team" }],
+  keywords: ["knowledge sharing", "personal platform", "learning", "documentation", "collaboration"],
+  authors: [{ name: "Wilboerht" }],
   icons: {
     icon: [
       {
@@ -60,14 +60,14 @@ export const metadata: Metadata = {
     apple: "/knolib-icon-48.svg",
   },
   openGraph: {
-    title: "KnoLib - Enterprise Knowledge Sharing Platform",
+    title: "KnoLib - Personal Knowledge Sharing Platform",
     description: "Your comprehensive knowledge library for continuous learning and professional growth.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "KnoLib - Enterprise Knowledge Sharing Platform",
+    title: "KnoLib - Personal Knowledge Sharing Platform",
     description: "Your comprehensive knowledge library for continuous learning and professional growth.",
   },
   robots: {
