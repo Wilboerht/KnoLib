@@ -6,45 +6,21 @@ import { Search, Clock, BookOpen } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import Link from "next/link";
 
-const allArticles = [
-  // Getting Started
-  { title: "Introduction to KnoLib", category: "Getting Started", href: "/knowledge/getting-started/introduction", readTime: "5 min", lastUpdated: "2 days ago", difficulty: "Beginner" },
-  { title: "Quick Start Guide", category: "Getting Started", href: "/knowledge/getting-started/quick-start", readTime: "8 min", lastUpdated: "1 week ago", difficulty: "Beginner" },
-  { title: "Basic Concepts", category: "Getting Started", href: "/knowledge/getting-started/concepts", readTime: "12 min", lastUpdated: "3 days ago", difficulty: "Beginner" },
-  { title: "Installation & Setup", category: "Getting Started", href: "/knowledge/getting-started/installation", readTime: "15 min", lastUpdated: "1 week ago", difficulty: "Beginner" },
-  
-  // User Guide
-  { title: "Dashboard Overview", category: "User Guide", href: "/knowledge/user-guide/dashboard", readTime: "6 min", lastUpdated: "5 days ago", difficulty: "Beginner" },
-  { title: "Managing Content", category: "User Guide", href: "/knowledge/user-guide/content", readTime: "15 min", lastUpdated: "1 week ago", difficulty: "Intermediate" },
-  { title: "Creating Articles", category: "User Guide", href: "/knowledge/user-guide/creating-articles", readTime: "10 min", lastUpdated: "4 days ago", difficulty: "Beginner" },
-  { title: "Collaboration Features", category: "User Guide", href: "/knowledge/user-guide/collaboration", readTime: "12 min", lastUpdated: "6 days ago", difficulty: "Intermediate" },
-  { title: "Search & Discovery", category: "User Guide", href: "/knowledge/user-guide/search", readTime: "8 min", lastUpdated: "3 days ago", difficulty: "Beginner" },
-  
-  // Administration
-  { title: "User Management", category: "Administration", href: "/knowledge/admin/users", readTime: "20 min", lastUpdated: "1 week ago", difficulty: "Advanced" },
-  { title: "Permissions & Roles", category: "Administration", href: "/knowledge/admin/permissions", readTime: "18 min", lastUpdated: "5 days ago", difficulty: "Advanced" },
-  { title: "System Configuration", category: "Administration", href: "/knowledge/admin/config", readTime: "25 min", lastUpdated: "1 week ago", difficulty: "Advanced" },
-  { title: "Analytics & Reporting", category: "Administration", href: "/knowledge/admin/analytics", readTime: "15 min", lastUpdated: "4 days ago", difficulty: "Intermediate" },
-  
-  // API Reference
-  { title: "REST API Overview", category: "API Reference", href: "/knowledge/api/rest", readTime: "10 min", lastUpdated: "6 days ago", difficulty: "Intermediate" },
-  { title: "Authentication", category: "API Reference", href: "/knowledge/api/auth", readTime: "15 min", lastUpdated: "1 week ago", difficulty: "Advanced" },
-  { title: "GraphQL API", category: "API Reference", href: "/knowledge/api/graphql", readTime: "20 min", lastUpdated: "5 days ago", difficulty: "Advanced" },
-  { title: "Webhooks", category: "API Reference", href: "/knowledge/api/webhooks", readTime: "12 min", lastUpdated: "3 days ago", difficulty: "Intermediate" },
-  
-  // Tutorials
-  { title: "Building Your First Knowledge Base", category: "Tutorials", href: "/knowledge/tutorials/first-kb", readTime: "25 min", lastUpdated: "1 week ago", difficulty: "Beginner" },
-  { title: "Setting Up Team Collaboration", category: "Tutorials", href: "/knowledge/tutorials/team-setup", readTime: "18 min", lastUpdated: "4 days ago", difficulty: "Intermediate" },
-  { title: "Advanced Search Techniques", category: "Tutorials", href: "/knowledge/tutorials/advanced-search", readTime: "15 min", lastUpdated: "6 days ago", difficulty: "Intermediate" },
-  
-  // FAQ
-  { title: "General Questions", category: "FAQ", href: "/knowledge/faq/general", readTime: "8 min", lastUpdated: "2 days ago", difficulty: "Beginner" },
-  { title: "Account & Billing", category: "FAQ", href: "/knowledge/faq/billing", readTime: "6 min", lastUpdated: "5 days ago", difficulty: "Beginner" },
-  { title: "Technical Issues", category: "FAQ", href: "/knowledge/faq/technical", readTime: "12 min", lastUpdated: "3 days ago", difficulty: "Intermediate" }
-];
+interface Article {
+  title: string;
+  category: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  href: string;
+  readTime: string;
+  lastUpdated: string;
+  description?: string;
+  featured?: boolean;
+}
 
-const categories = ["All", "Getting Started", "User Guide", "Administration", "API Reference", "Tutorials", "FAQ"];
-const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
+const allArticles: Article[] = [];
+
+const categories = ["All"];
+const difficulties = ["All"];
 
 export default function AllArticlesPage() {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -129,16 +105,18 @@ export default function AllArticlesPage() {
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
+                  aria-label="Filter by category"
                 >
                   {categories.map(category => (
                     <option key={category} value={category}>{category}</option>
                   ))}
                 </select>
-                
+
                 <select
                   value={selectedDifficulty}
                   onChange={(e) => setSelectedDifficulty(e.target.value)}
                   className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
+                  aria-label="Filter by difficulty level"
                 >
                   {difficulties.map(difficulty => (
                     <option key={difficulty} value={difficulty}>{difficulty}</option>
@@ -154,6 +132,7 @@ export default function AllArticlesPage() {
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                   className="px-3 py-1 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
+                  aria-label="Sort articles by"
                 >
                   <option value="newest">Newest First</option>
                   <option value="title">Alphabetical</option>

@@ -17,38 +17,7 @@ const tableOfContents = [
   { id: "getting-started", title: "Getting Started" }
 ];
 
-const features = [
-  {
-    icon: BookOpen,
-    title: "Knowledge Management",
-    description: "Centralize and organize your personal knowledge in one accessible platform."
-  },
-  {
-    icon: Users,
-    title: "Knowledge Sharing",
-    description: "Share your insights and learn from others with easy publishing features."
-  },
-  {
-    icon: Zap,
-    title: "Smart Search",
-    description: "Find information instantly with AI-powered search and content discovery."
-  },
-  {
-    icon: Shield,
-    title: "Secure & Private",
-    description: "Keep your knowledge safe with privacy controls and secure access."
-  },
-  {
-    icon: Clock,
-    title: "Version Control",
-    description: "Track changes and maintain document history with built-in version control."
-  },
-  {
-    icon: Globe,
-    title: "Global Access",
-    description: "Access your knowledge base from anywhere with cloud-based infrastructure."
-  }
-];
+const features: any[] = [];
 
 export default function IntroductionPage() {
   return (

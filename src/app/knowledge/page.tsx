@@ -7,108 +7,13 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const categories = [
-  {
-    title: "Getting Started",
-    description: "Essential guides for new users",
-    icon: Zap,
-    count: 12,
-    articles: [
-      { title: "Introduction to KnoLib", href: "/knowledge/getting-started/introduction" },
-      { title: "Quick Start Guide", href: "/knowledge/getting-started/quick-start" },
-      { title: "Basic Concepts", href: "/knowledge/getting-started/concepts" },
-      { title: "Installation & Setup", href: "/knowledge/getting-started/installation" },
-      { title: "First Project", href: "/knowledge/getting-started/first-project" },
-      { title: "Configuration", href: "/knowledge/getting-started/configuration" },
-      { title: "Troubleshooting", href: "/knowledge/getting-started/troubleshooting" },
-      { title: "Best Practices", href: "/knowledge/getting-started/best-practices" }
-    ]
-  },
-  {
-    title: "User Guide",
-    description: "Comprehensive user documentation",
-    icon: BookOpen,
-    count: 28,
-    articles: [
-      { title: "Dashboard Overview", href: "/knowledge/user-guide/dashboard" },
-      { title: "Managing Content", href: "/knowledge/user-guide/content" },
-      { title: "Creating Articles", href: "/knowledge/user-guide/creating-articles" },
-      { title: "Organizing Content", href: "/knowledge/user-guide/organizing" },
-      { title: "Collaboration Features", href: "/knowledge/user-guide/collaboration" },
-      { title: "Search & Discovery", href: "/knowledge/user-guide/search" },
-      { title: "Comments & Reviews", href: "/knowledge/user-guide/comments" },
-      { title: "Notifications", href: "/knowledge/user-guide/notifications" },
-      { title: "Profile Settings", href: "/knowledge/user-guide/profile" },
-      { title: "Workspace Management", href: "/knowledge/user-guide/workspaces" }
-    ]
-  },
-  {
-    title: "Administration",
-    description: "System administration guides",
-    icon: Users,
-    count: 18,
-    articles: [
-      { title: "User Management", href: "/knowledge/admin/users" },
-      { title: "Permissions & Roles", href: "/knowledge/admin/permissions" },
-      { title: "System Configuration", href: "/knowledge/admin/config" },
-      { title: "Analytics & Reporting", href: "/knowledge/admin/analytics" },
-      { title: "Backup & Recovery", href: "/knowledge/admin/backup" },
-      { title: "Security Settings", href: "/knowledge/admin/security" },
-      { title: "Integration Management", href: "/knowledge/admin/integrations" },
-      { title: "Performance Monitoring", href: "/knowledge/admin/monitoring" }
-    ]
-  },
-  {
-    title: "API Reference",
-    description: "Technical documentation and APIs",
-    icon: Code,
-    count: 24,
-    articles: [
-      { title: "REST API Overview", href: "/knowledge/api/rest" },
-      { title: "Authentication", href: "/knowledge/api/auth" },
-      { title: "GraphQL API", href: "/knowledge/api/graphql" },
-      { title: "Webhooks", href: "/knowledge/api/webhooks" },
-      { title: "Rate Limiting", href: "/knowledge/api/rate-limiting" },
-      { title: "Error Handling", href: "/knowledge/api/errors" },
-      { title: "SDKs & Libraries", href: "/knowledge/api/sdks" },
-      { title: "API Examples", href: "/knowledge/api/examples" }
-    ]
-  },
-  {
-    title: "Tutorials",
-    description: "Step-by-step tutorials",
-    icon: BookOpen,
-    count: 15,
-    articles: [
-      { title: "Building Your First Knowledge Base", href: "/knowledge/tutorials/first-kb" },
-      { title: "Setting Up Team Collaboration", href: "/knowledge/tutorials/team-setup" },
-      { title: "Advanced Search Techniques", href: "/knowledge/tutorials/advanced-search" },
-      { title: "Custom Integrations", href: "/knowledge/tutorials/integrations" },
-      { title: "Content Migration", href: "/knowledge/tutorials/migration" },
-      { title: "Performance Optimization", href: "/knowledge/tutorials/optimization" }
-    ]
-  },
-  {
-    title: "FAQ",
-    description: "Frequently asked questions",
-    icon: MessageSquare,
-    count: 35,
-    articles: [
-      { title: "General Questions", href: "/knowledge/faq/general" },
-      { title: "Account & Billing", href: "/knowledge/faq/billing" },
-      { title: "Technical Issues", href: "/knowledge/faq/technical" },
-      { title: "Security & Privacy", href: "/knowledge/faq/security" },
-      { title: "Integration Questions", href: "/knowledge/faq/integrations" },
-      { title: "Performance & Limits", href: "/knowledge/faq/performance" }
-    ]
-  }
-];
+const categories: any[] = [];
 
 const stats = [
-  { icon: FileText, label: "Articles", count: "132" },
-  { icon: Code, label: "Code Examples", count: "45" },
-  { icon: MessageSquare, label: "FAQs", count: "35" },
-  { icon: Users, label: "Contributors", count: "12" }
+  { icon: FileText, label: "Articles", count: "0" },
+  { icon: Code, label: "Code Examples", count: "0" },
+  { icon: MessageSquare, label: "FAQs", count: "0" },
+  { icon: Users, label: "Contributors", count: "0" }
 ];
 
 export default function KnowledgePage() {

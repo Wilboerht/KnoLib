@@ -12,54 +12,7 @@ interface NavItem {
   children?: NavItem[];
 }
 
-const navigation: NavItem[] = [
-  {
-    title: "Getting Started",
-    icon: BookOpen,
-    children: [
-      { title: "Introduction", href: "/knowledge/getting-started/introduction" },
-      { title: "Quick Start", href: "/knowledge/getting-started/quick-start" },
-      { title: "Basic Concepts", href: "/knowledge/getting-started/concepts" },
-      { title: "First Steps", href: "/knowledge/getting-started/first-steps" }
-    ]
-  },
-  {
-    title: "User Guide",
-    icon: Users,
-    children: [
-      { title: "Dashboard Overview", href: "/knowledge/user-guide/dashboard" },
-      { title: "Managing Content", href: "/knowledge/user-guide/content" },
-      { title: "Collaboration Features", href: "/knowledge/user-guide/collaboration" },
-      { title: "Search & Discovery", href: "/knowledge/user-guide/search" },
-      { title: "Notifications", href: "/knowledge/user-guide/notifications" },
-      { title: "Profile Settings", href: "/knowledge/user-guide/profile" }
-    ]
-  },
-  {
-    title: "Administration",
-    icon: Settings,
-    children: [
-      { title: "User Management", href: "/knowledge/admin/users" },
-      { title: "Permissions & Roles", href: "/knowledge/admin/permissions" },
-      { title: "System Configuration", href: "/knowledge/admin/config" },
-      { title: "Analytics & Reporting", href: "/knowledge/admin/analytics" },
-      { title: "Backup & Recovery", href: "/knowledge/admin/backup" },
-      { title: "Security Settings", href: "/knowledge/admin/security" }
-    ]
-  },
-  {
-    title: "API Reference",
-    icon: Code,
-    children: [
-      { title: "REST API Overview", href: "/knowledge/api/rest" },
-      { title: "Authentication", href: "/knowledge/api/auth" },
-      { title: "GraphQL API", href: "/knowledge/api/graphql" },
-      { title: "Webhooks", href: "/knowledge/api/webhooks" },
-      { title: "Rate Limiting", href: "/knowledge/api/rate-limiting" },
-      { title: "Error Handling", href: "/knowledge/api/errors" }
-    ]
-  }
-];
+const navigation: NavItem[] = [];
 
 interface DocSidebarProps {
   className?: string;

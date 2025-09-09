@@ -7,77 +7,14 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const searchResults = [
-  {
-    title: "Getting Started with KnoLib",
-    description: "Learn the basics of KnoLib platform and how to set up your first knowledge base.",
-    category: "Getting Started",
-    readTime: "5 min",
-    lastUpdated: "2 days ago",
-    difficulty: "Beginner",
-    tags: ["setup", "basics", "tutorial"],
-    href: "/knowledge/getting-started/introduction",
-    relevance: 95
-  },
-  {
-    title: "API Authentication Guide",
-    description: "Complete guide to implementing authentication in your KnoLib API integrations.",
-    category: "API Reference",
-    readTime: "8 min",
-    lastUpdated: "1 week ago",
-    difficulty: "Advanced",
-    tags: ["api", "authentication", "security"],
-    href: "/knowledge/api/auth",
-    relevance: 88
-  },
-  {
-    title: "User Management Best Practices",
-    description: "Best practices for managing users, roles, and permissions in your organization.",
-    category: "Administration",
-    readTime: "12 min",
-    lastUpdated: "3 days ago",
-    difficulty: "Intermediate",
-    tags: ["users", "permissions", "admin"],
-    href: "/knowledge/admin/users",
-    relevance: 82
-  },
-  {
-    title: "Advanced Search Techniques",
-    description: "Master the advanced search features to find information quickly and efficiently.",
-    category: "User Guide",
-    readTime: "7 min",
-    lastUpdated: "5 days ago",
-    difficulty: "Intermediate",
-    tags: ["search", "tips", "productivity"],
-    href: "/knowledge/user-guide/search",
-    relevance: 78
-  },
-  {
-    title: "Integration Workflows",
-    description: "Learn how to integrate KnoLib with your existing tools and workflows.",
-    category: "API Reference",
-    readTime: "15 min",
-    lastUpdated: "1 week ago",
-    difficulty: "Advanced",
-    tags: ["integration", "workflow", "automation"],
-    href: "/knowledge/api/webhooks",
-    relevance: 75
-  }
-];
+const searchResults: any[] = [];
 
 const filters = [
-  { label: "All Categories", value: "all", count: 150 },
-  { label: "Getting Started", value: "getting-started", count: 25 },
-  { label: "User Guide", value: "user-guide", count: 45 },
-  { label: "Administration", value: "admin", count: 35 },
-  { label: "API Reference", value: "api", count: 45 }
+  { label: "All Categories", value: "all", count: 0 }
 ];
 
 const difficultyFilters = [
-  { label: "All Levels", value: "all" },
-  { label: "Beginner", value: "beginner" },
-  { label: "Intermediate", value: "intermediate" },
-  { label: "Advanced", value: "advanced" }
+  { label: "All Levels", value: "all" }
 ];
 
 export default function SearchPage() {

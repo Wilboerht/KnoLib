@@ -3,28 +3,11 @@ import { Container } from "@/components/ui/container";
 import { KnoLibIcon } from "@/components/ui/all-docs-icon";
 
 const footerNavigation = {
-  learning: [
-    { name: "Knowledge Base", href: "/knowledge" },
-    { name: "Best Practices", href: "/best-practices" },
-    { name: "Skill Paths", href: "/skill-paths" },
-  ],
-  community: [
-    { name: "Forums", href: "/forums" },
-    { name: "Expert Network", href: "/experts" },
-    { name: "Study Groups", href: "/groups" },
-    { name: "Events", href: "/events" },
-  ],
-  resources: [
-    { name: "Documentation", href: "/docs" },
-    { name: "Templates", href: "/templates" },
-    { name: "Tools", href: "/tools" },
-    { name: "Certifications", href: "/certifications" },
-  ],
+  learning: [],
+  community: [],
+  resources: [],
   link: [
-    { name: "Blog", href: "https://www.wilboerht.cn/" },
-    { name: "Contact", href: "/contact" },
-    { name: "Feedback", href: "/feedback" },
-    { name: "Status", href: "/status" },
+    { name: "Blog", href: "https://www.wilboerht.cn/" }
   ],
 };
 

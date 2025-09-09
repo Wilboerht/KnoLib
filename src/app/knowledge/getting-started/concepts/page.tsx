@@ -19,74 +19,7 @@ const tableOfContents = [
   { id: "search-discovery", title: "Search & Discovery" }
 ];
 
-const concepts = [
-  {
-    icon: Folder,
-    title: "Workspaces",
-    description: "Containers that organize your knowledge and team collaboration",
-    details: [
-      "Isolated environments for different teams or projects",
-      "Customizable settings and permissions",
-      "Can be private, team-based, or organization-wide",
-      "Support multiple content types and organizational structures"
-    ]
-  },
-  {
-    icon: FileText,
-    title: "Content Types",
-    description: "Different formats for organizing and presenting information",
-    details: [
-      "Articles: Rich text documents with formatting and media",
-      "Guides: Step-by-step tutorials and procedures",
-      "FAQs: Question and answer format for common inquiries",
-      "Resources: File attachments, links, and reference materials"
-    ]
-  },
-  {
-    icon: Tag,
-    title: "Organization",
-    description: "Systems for structuring and categorizing your knowledge",
-    details: [
-      "Categories: Broad topic-based groupings",
-      "Tags: Specific keywords and themes for cross-referencing",
-      "Collections: Curated groups of related content",
-      "Hierarchical folder structures for logical organization"
-    ]
-  },
-  {
-    icon: Users,
-    title: "Collaboration",
-    description: "Features that enable team-based knowledge creation and sharing",
-    details: [
-      "Real-time collaborative editing",
-      "Comments and discussions on content",
-      "Review and approval workflows",
-      "Version history and change tracking"
-    ]
-  },
-  {
-    icon: Lock,
-    title: "Permissions",
-    description: "Access control and security features",
-    details: [
-      "Role-based access control (RBAC)",
-      "Granular permissions at workspace and content level",
-      "Guest access for external collaborators",
-      "Audit trails for security and compliance"
-    ]
-  },
-  {
-    icon: Search,
-    title: "Search & Discovery",
-    description: "Tools for finding and discovering relevant information",
-    details: [
-      "Full-text search across all content",
-      "AI-powered content recommendations",
-      "Advanced filtering and faceted search",
-      "Related content suggestions"
-    ]
-  }
-];
+const concepts: any[] = [];
 
 export default function ConceptsPage() {
   return (

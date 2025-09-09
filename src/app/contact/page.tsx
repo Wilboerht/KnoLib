@@ -19,29 +19,7 @@ import {
 } from "@/components/ui/icons";
 
 
-const contactMethods = [
-  {
-    icon: MessageIcon,
-    title: "Knowledge Sharing",
-    description: "Learn how KnoLib can help with your personal knowledge management",
-    contact: "hello@knolib.com",
-    action: "Start Sharing"
-  },
-  {
-    icon: SupportIcon,
-    title: "Technical Support",
-    description: "Technical support for KnoLib platform users",
-    contact: "support@knolib.com",
-    action: "Get Support"
-  },
-  {
-    icon: PartnersIcon,
-    title: "Collaboration",
-    description: "Explore collaboration and knowledge sharing opportunities",
-    contact: "partners@knolib.com",
-    action: "Collaborate"
-  }
-];
+const contactMethods: any[] = [];
 
 // Personal platform - no physical offices needed
 

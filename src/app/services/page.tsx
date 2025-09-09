@@ -15,86 +15,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 
-const services = [
-  {
-    icon: BarChart3,
-    title: "Advanced Analytics Platform",
-    description: "Comprehensive data visualization and analytics platform with real-time dashboards, custom reporting, and interactive data exploration tools.",
-    features: [
-      "Real-time data processing",
-      "Interactive dashboards",
-      "Custom report builder",
-      "Data visualization tools",
-      "Automated insights"
-    ],
-    color: "blue"
-  },
-  {
-    icon: Brain,
-    title: "AI & Machine Learning",
-    description: "Cutting-edge AI solutions including predictive analytics, natural language processing, and automated decision-making systems.",
-    features: [
-      "Predictive modeling",
-      "Natural language processing",
-      "Computer vision",
-      "Automated ML pipelines",
-      "AI-powered insights"
-    ],
-    color: "purple"
-  },
-  {
-    icon: Database,
-    title: "Data Integration & ETL",
-    description: "Seamless data integration from multiple sources with robust ETL pipelines, data quality management, and real-time synchronization.",
-    features: [
-      "Multi-source integration",
-      "Real-time ETL pipelines",
-      "Data quality monitoring",
-      "Schema management",
-      "API connectivity"
-    ],
-    color: "green"
-  },
-  {
-    icon: Shield,
-    title: "Enterprise Security",
-    description: "Bank-grade security with end-to-end encryption, compliance management, and advanced access controls for enterprise environments.",
-    features: [
-      "End-to-end encryption",
-      "SOC 2 compliance",
-      "Role-based access control",
-      "Audit logging",
-      "Data governance"
-    ],
-    color: "red"
-  },
-  {
-    icon: Cloud,
-    title: "Cloud Infrastructure",
-    description: "Scalable cloud infrastructure with auto-scaling, global deployment, and 99.9% uptime guarantee across multiple regions.",
-    features: [
-      "Auto-scaling infrastructure",
-      "Global deployment",
-      "99.9% uptime SLA",
-      "Multi-region support",
-      "Disaster recovery"
-    ],
-    color: "cyan"
-  },
-  {
-    icon: Users,
-    title: "Consulting & Support",
-    description: "Expert consulting services, implementation support, and 24/7 technical assistance to ensure your success with our platform.",
-    features: [
-      "Implementation consulting",
-      "24/7 technical support",
-      "Training programs",
-      "Best practices guidance",
-      "Dedicated success manager"
-    ],
-    color: "orange"
-  }
-];
+const services: any[] = [];
 
 const colorClasses = {
   blue: "text-blue-600 bg-blue-50 dark:bg-blue-900/20",
@@ -105,14 +26,7 @@ const colorClasses = {
   orange: "text-orange-600 bg-orange-50 dark:bg-orange-900/20"
 };
 
-const industries = [
-  { name: "Financial Services", description: "Risk management, fraud detection, regulatory compliance" },
-  { name: "Healthcare", description: "Patient analytics, clinical research, operational efficiency" },
-  { name: "Retail & E-commerce", description: "Customer insights, inventory optimization, personalization" },
-  { name: "Manufacturing", description: "Predictive maintenance, quality control, supply chain optimization" },
-  { name: "Technology", description: "Product analytics, user behavior, performance monitoring" },
-  { name: "Government", description: "Public safety, resource allocation, citizen services" }
-];
+const industries: any[] = [];
 
 export default function ServicesPage() {
   return (
