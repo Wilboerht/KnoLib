@@ -1,205 +1,201 @@
+/**
+ * Search page
+ *
+ * Provides global search functionality
+ */
+
 "use client";
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Search, Filter, Clock, Star, ArrowRight, Calendar } from "lucide-react";
+import { Search, FileText, FolderOpen, Tag, ArrowLeft } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Link from "next/link";
 
-const searchResults: any[] = [];
-
-const filters = [
-  { label: "All Categories", value: "all", count: 0 }
-];
-
-const difficultyFilters = [
-  { label: "All Levels", value: "all" }
-];
-
 export default function SearchPage() {
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [selectedCategory, setSelectedCategory] = React.useState("all");
-  const [selectedDifficulty, setSelectedDifficulty] = React.useState("all");
-  const [sortBy, setSortBy] = React.useState("relevance");
+  const [query, setQuery] = React.useState("");
+  const [results, setResults] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState(false);
+  const [searchType, setSearchType] = React.useState<'all' | 'articles' | 'categories' | 'tags'>('all');
+
+  // Execute search
+  const performSearch = React.useCallback(async (searchQuery: string) => {
+    if (!searchQuery.trim() || searchQuery.length < 2) {
+      setResults(null);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}&type=${searchType}`);
+      const result = await response.json();
+
+      if (result.success) {
+        setResults(result.data);
+      } else {
+        console.error('Search failed:', result.error);
+        setResults(null);
+      }
+    } catch (error) {
+      console.error('Search failed:', error);
+      setResults(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [searchType]);
+
+  // Debounced search
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      performSearch(query);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [query, performSearch]);
 
   return (
     <div className="min-h-screen pt-16 sm:pt-20">
-      {/* Search Header */}
-      <section className="py-8 bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800">
-        <Container>
+      <Container>
+        <div className="max-w-4xl mx-auto">
+          {/* Page header */}
           <motion.div
-            className="max-w-4xl mx-auto"
+            className="mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Search Documentation
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Find answers, guides, and resources across our knowledge base
-            </p>
+            <Link href="/knowledge">
+              <Button variant="ghost" size="sm" className="text-gray-600 dark:text-gray-400 mb-4">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Knowledge Base
+              </Button>
+            </Link>
 
-            {/* Enhanced Search Bar */}
-            <div className="relative mb-6">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Search Knowledge Base
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300">
+              Search articles, categories and tags
+            </p>
+          </motion.div>
+
+          {/* Search box */}
+          <motion.div
+            className="mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <input
+              <Input
                 type="text"
-                placeholder="Search for guides, tutorials, API docs..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 text-base border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition-all"
-                spellCheck={false}
-                autoComplete="off"
+                placeholder="Search articles, categories, tags..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="pl-12 pr-4 py-4 text-lg"
+                autoFocus
               />
             </div>
 
-            {/* Filters */}
-            <div className="flex flex-wrap gap-4 items-center">
-              <div className="flex items-center space-x-2">
-                <Filter className="h-4 w-4 text-gray-500" />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Filters:</span>
-              </div>
-              
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
-              >
-                {filters.map((filter) => (
-                  <option key={filter.value} value={filter.value}>
-                    {filter.label} ({filter.count})
-                  </option>
-                ))}
-              </select>
-
-              <select
-                value={selectedDifficulty}
-                onChange={(e) => setSelectedDifficulty(e.target.value)}
-                className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
-              >
-                {difficultyFilters.map((filter) => (
-                  <option key={filter.value} value={filter.value}>
-                    {filter.label}
-                  </option>
-                ))}
-              </select>
-
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
-              >
-                <option value="relevance">Sort by Relevance</option>
-                <option value="date">Sort by Date</option>
-                <option value="popularity">Sort by Popularity</option>
-              </select>
-            </div>
-          </motion.div>
-        </Container>
-      </section>
-
-      {/* Search Results */}
-      <section className="py-8">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            {/* Results Header */}
-            <motion.div
-              className="flex items-center justify-between mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Search Results
-                </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Found {searchResults.length} results
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Results List */}
-            <div className="space-y-4">
-              {searchResults.map((result, index) => (
-                <motion.div
-                  key={result.title}
-                  className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md hover:border-gray-300 dark:hover:border-slate-600 transition-all duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+            {/* Search type selection */}
+            <div className="flex space-x-2 mt-4">
+              {[
+                { key: 'all', label: 'All' },
+                { key: 'articles', label: 'Articles' },
+                { key: 'categories', label: 'Categories' },
+                { key: 'tags', label: 'Tags' },
+              ].map(({ key, label }) => (
+                <Button
+                  key={key}
+                  variant={searchType === key ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setSearchType(key as any)}
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center space-x-3">
-                      <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full">
-                        {result.category}
-                      </span>
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        result.difficulty === 'Beginner' ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400' :
-                        result.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400' :
-                        'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400'
-                      }`}>
-                        {result.difficulty}
-                      </span>
-                    </div>
-                    <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
-                      <Star className="h-3 w-3 mr-1" />
-                      {result.relevance}% match
-                    </div>
-                  </div>
-
-                  <Link href={result.href} className="group">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
-                      {result.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
-                      {result.description}
-                    </p>
-                  </Link>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
-                      <div className="flex items-center">
-                        <Clock className="h-3 w-3 mr-1" />
-                        {result.readTime}
-                      </div>
-                      <div className="flex items-center">
-                        <Calendar className="h-3 w-3 mr-1" />
-                        {result.lastUpdated}
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center space-x-2">
-                      {result.tags.map((tag) => (
-                        <span key={tag} className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-slate-700 px-2 py-1 rounded">
-                          {tag}
-                        </span>
-                      ))}
-                      <Link href={result.href} className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </div>
-                  </div>
-                </motion.div>
+                  {label}
+                </Button>
               ))}
             </div>
+          </motion.div>
 
-            {/* Load More */}
-            <motion.div
-              className="text-center mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <Button variant="outline">
-                Load More Results
-              </Button>
-            </motion.div>
-          </div>
-        </Container>
-      </section>
+          {/* Search results */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {loading && (
+              <div className="text-center py-8">
+                <p className="text-gray-600 dark:text-gray-400">Searching...</p>
+              </div>
+            )}
+
+            {!loading && query.length >= 2 && results && (
+              <div className="space-y-8">
+                {/* Article results */}
+                {results.articles && results.articles.length > 0 && (
+                  <div>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                      <FileText className="h-5 w-5 mr-2" />
+                      Articles ({results.articles.length})
+                    </h2>
+                    <div className="space-y-4">
+                      {results.articles.map((article: any) => (
+                        <Link key={article.id} href={`/knowledge/${article.category.slug}/${article.slug}`}>
+                          <div className="bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md transition-shadow">
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 hover:text-blue-600 dark:hover:text-blue-400">
+                              {article.title}
+                            </h3>
+                            {article.excerpt && (
+                              <p className="text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
+                                {article.excerpt}
+                              </p>
+                            )}
+                            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                              <span>{article.category.name}</span>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* No results */}
+                {results.total === 0 && (
+                  <div className="text-center py-16">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center">
+                      <Search className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                      No results found
+                    </h3>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      No content found containing "{query}". Try different keywords.
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {!loading && !query && (
+              <div className="text-center py-16">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center">
+                  <Search className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Start searching
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400">
+                  Enter keywords to search articles, categories and tags
+                </p>
+              </div>
+            )}
+          </motion.div>
+        </div>
+      </Container>
     </div>
   );
 }

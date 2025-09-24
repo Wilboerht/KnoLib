@@ -2,11 +2,22 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Search, ArrowRight, Clock, BookOpen, Zap, User, Calendar } from "lucide-react";
+import { Search, ArrowRight, Clock, BookOpen, Zap, Calendar } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import Link from "next/link";
 
-const articles: any[] = [];
+interface GettingStartedArticle {
+  title: string;
+  description: string;
+  href: string;
+  readTime: string;
+  lastUpdated: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  author: string;
+  featured?: boolean;
+}
+
+const articles: GettingStartedArticle[] = [];
 
 export default function GettingStartedPage() {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -90,6 +101,7 @@ export default function GettingStartedPage() {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
+                aria-label="Sort articles by"
               >
                 <option value="featured">Featured First</option>
                 <option value="newest">Newest First</option>
@@ -144,10 +156,6 @@ export default function GettingStartedPage() {
                       <div className="flex items-center">
                         <Clock className="h-4 w-4 mr-1" />
                         {article.readTime}
-                      </div>
-                      <div className="flex items-center">
-                        <User className="h-4 w-4 mr-1" />
-                        {article.author}
                       </div>
                       <div className="flex items-center">
                         <Calendar className="h-4 w-4 mr-1" />

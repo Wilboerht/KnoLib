@@ -2,20 +2,23 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { 
-  BarChart3, 
-  Brain, 
-  Database, 
-  Shield, 
+import {
   ArrowRight,
-  CheckCircle,
-  Users,
-  Cloud
+  CheckCircle
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 
-const services: any[] = [];
+interface Service {
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+  features: string[];
+  color: keyof typeof colorClasses;
+  href: string;
+}
+
+const services: Service[] = [];
 
 const colorClasses = {
   blue: "text-blue-600 bg-blue-50 dark:bg-blue-900/20",
@@ -26,7 +29,14 @@ const colorClasses = {
   orange: "text-orange-600 bg-orange-50 dark:bg-orange-900/20"
 };
 
-const industries: any[] = [];
+interface Industry {
+  name: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+  useCases: string[];
+}
+
+const industries: Industry[] = [];
 
 export default function ServicesPage() {
   return (

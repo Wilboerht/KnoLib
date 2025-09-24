@@ -11,7 +11,7 @@ export function Hero() {
 
       {/* Content */}
       <Container className="relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
+        <div className="text-center max-w-6xl mx-auto">
           {/* Main heading */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -19,7 +19,7 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-5xl font-dingtalk-jinbu font-light text-white mb-6 drop-shadow-lg"
           >
-            用文字记录学习过程中的每一次灵感
+            Documenting every spark of inspiration in learning and creation through words
           </motion.h1>
 
           {/* Simple subtitle */}
@@ -44,7 +44,7 @@ export function Hero() {
       >
         <div className="flex flex-col items-center space-y-2">
           <span className="text-white/80 text-sm font-medium font-dingtalk-sans">
-            滚动以向下查看更多
+            Scroll down to explore more
           </span>
           <motion.div
             animate={{ y: [0, 8, 0] }}

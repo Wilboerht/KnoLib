@@ -7,43 +7,83 @@ import { Container } from "@/components/ui/container";
 import Link from "next/link";
 
 interface Article {
+  id: string;
   title: string;
-  category: string;
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
-  href: string;
-  readTime: string;
-  lastUpdated: string;
-  description?: string;
-  featured?: boolean;
+  slug: string;
+  excerpt?: string;
+  category?: {
+    id: string;
+    name: string;
+    slug: string;
+  };
+  difficulty: string;
+  readTime?: number;
+  author?: string;
+  published: boolean;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
-const allArticles: Article[] = [];
-
-const categories = ["All"];
-const difficulties = ["All"];
+const difficulties = ["All", "BEGINNER", "INTERMEDIATE", "ADVANCED"];
 
 export default function AllArticlesPage() {
+  const [articles, setArticles] = React.useState<Article[]>([]);
+  const [categories, setCategories] = React.useState<string[]>(["All"]);
+  const [loading, setLoading] = React.useState(true);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [selectedCategory, setSelectedCategory] = React.useState("All");
   const [selectedDifficulty, setSelectedDifficulty] = React.useState("All");
   const [sortBy, setSortBy] = React.useState("newest");
 
-  const filteredArticles = allArticles
+  // Load articles and categories from API
+  React.useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+
+        // Load articles
+        const articlesResponse = await fetch('/api/articles');
+        const articlesResult = await articlesResponse.json();
+
+        if (articlesResult.success) {
+          setArticles(articlesResult.data);
+
+          // Extract unique categories
+          const uniqueCategories = ["All", ...new Set(
+            articlesResult.data
+              .filter((article: Article) => article.category)
+              .map((article: Article) => article.category!.name)
+          )];
+          setCategories(uniqueCategories);
+        }
+      } catch (error) {
+        console.error('Failed to load articles:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const filteredArticles = articles
     .filter(article => {
-      const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
+      const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           article.excerpt?.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory = selectedCategory === "All" || article.category?.name === selectedCategory;
       const matchesDifficulty = selectedDifficulty === "All" || article.difficulty === selectedDifficulty;
       return matchesSearch && matchesCategory && matchesDifficulty;
     })
     .sort((a, b) => {
       if (sortBy === "newest") {
-        return new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime();
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
       }
       if (sortBy === "title") {
         return a.title.localeCompare(b.title);
       }
       if (sortBy === "category") {
-        return a.category.localeCompare(b.category);
+        return (a.category?.name || '').localeCompare(b.category?.name || '');
       }
       return 0;
     });
@@ -79,7 +119,7 @@ export default function AllArticlesPage() {
                 All Articles
               </h1>
               <p className="text-gray-600 dark:text-gray-300">
-                Browse all documentation and guides • {allArticles.length} total articles
+                Browse all documentation and guides • {loading ? 'Loading...' : `${articles.length} total articles`}
               </p>
             </div>
 
@@ -126,7 +166,7 @@ export default function AllArticlesPage() {
               
               <div className="flex items-center justify-between mt-4">
                 <div className="text-sm text-gray-600 dark:text-gray-300">
-                  Showing {filteredArticles.length} of {allArticles.length} articles
+                  Showing {filteredArticles.length} of {articles.length} articles
                 </div>
                 <select
                   value={sortBy}
@@ -148,46 +188,57 @@ export default function AllArticlesPage() {
       <section className="py-8">
         <Container>
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredArticles.map((article, index) => (
-                <motion.div
-                  key={article.title}
-                  className="bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 p-5 hover:shadow-md hover:border-gray-300 dark:hover:border-slate-600 transition-all duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.02 }}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full">
-                      {article.category}
-                    </span>
-                    <span className={`text-xs px-2 py-1 rounded-full ${
-                      article.difficulty === 'Beginner' ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400' :
-                      article.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400' :
-                      'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400'
-                    }`}>
-                      {article.difficulty}
-                    </span>
-                  </div>
-
-                  <Link href={article.href} className="group">
-                    <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-3 line-clamp-2">
-                      {article.title}
-                    </h3>
-                  </Link>
-
-                  <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-3 w-3" />
-                      <span>{article.readTime}</span>
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p className="text-gray-600 dark:text-gray-400">Loading articles...</p>
+              </div>
+            ) : filteredArticles.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredArticles.map((article, index) => (
+                  <motion.div
+                    key={article.id}
+                    className="bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 p-5 hover:shadow-md hover:border-gray-300 dark:hover:border-slate-600 transition-all duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.02 }}
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full">
+                        {article.category?.name || 'Uncategorized'}
+                      </span>
+                      <span className={`text-xs px-2 py-1 rounded-full ${
+                        article.difficulty === 'BEGINNER' ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400' :
+                        article.difficulty === 'INTERMEDIATE' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400' :
+                        'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400'
+                      }`}>
+                        {article.difficulty}
+                      </span>
                     </div>
-                    <span>{article.lastUpdated}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
 
-            {filteredArticles.length === 0 && (
+                    <Link href={`/knowledge/${article.category?.slug}/${article.slug}`} className="group">
+                      <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-3 line-clamp-2">
+                        {article.title}
+                      </h3>
+                    </Link>
+
+                    {article.excerpt && (
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
+                        {article.excerpt}
+                      </p>
+                    )}
+
+                    <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center space-x-2">
+                        <Clock className="h-3 w-3" />
+                        <span>{article.readTime ? `${article.readTime} min read` : '5 min read'}</span>
+                      </div>
+                      <span>{new Date(article.updatedAt).toLocaleDateString()}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
               <motion.div
                 className="text-center py-12"
                 initial={{ opacity: 0, y: 20 }}

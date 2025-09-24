@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { DocLayout } from "@/components/docs/doc-layout";
-import { Folder, Users, FileText, Tag, Search, Lock } from "lucide-react";
+import { Users, FileText, Search } from "lucide-react";
 
 const breadcrumbs = [
   { label: "Knowledge Base", href: "/knowledge" },
@@ -19,7 +19,16 @@ const tableOfContents = [
   { id: "search-discovery", title: "Search & Discovery" }
 ];
 
-const concepts: any[] = [];
+interface Concept {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  icon: React.ComponentType<{ className?: string }>;
+  details: string[];
+}
+
+const concepts: Concept[] = [];
 
 export default function ConceptsPage() {
   return (

@@ -3,6 +3,8 @@ import { Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { MainLayout } from "@/components/layout/main-layout";
+import { AuthProvider } from "@/lib/auth/context";
+import { ClientSessionProvider } from "@/components/providers/session-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,14 +17,14 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-// DingTalk 进步体字体
+// DingTalk Jinbu Font
 const dingTalkJinbu = localFont({
   src: "../../public/fonts/DingTalk Jinbu/DingTalk JinBuTi.ttf",
   variable: "--font-dingtalk-jinbu",
   display: "swap",
 });
 
-// DingTalk Sans字体
+// DingTalk Sans Font
 const dingTalkSans = localFont({
   src: "../../public/fonts/DingTalk Jinbu/DingTalk Sans.ttf",
   variable: "--font-dingtalk-sans",
@@ -84,7 +86,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable} ${dingTalkJinbu.variable} ${dingTalkSans.variable}`}>
       <body className="font-sans antialiased" suppressHydrationWarning={true}>
-        <MainLayout>{children}</MainLayout>
+        <ClientSessionProvider>
+          <AuthProvider>
+            <MainLayout>{children}</MainLayout>
+          </AuthProvider>
+        </ClientSessionProvider>
       </body>
     </html>
   );

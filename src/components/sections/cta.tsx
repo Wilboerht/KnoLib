@@ -18,7 +18,7 @@ export function CTA() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            准备好开始了吗？
+            Ready to Get Started?
           </motion.h2>
 
           <motion.p
@@ -28,7 +28,7 @@ export function CTA() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            探索知识，记录思考，分享见解
+            Explore knowledge, document thoughts, share insights
           </motion.p>
 
           <motion.div
@@ -42,7 +42,7 @@ export function CTA() {
               size="lg"
               className="group bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 px-8 py-3"
             >
-              开始探索
+              Start Exploring
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
 
@@ -51,7 +51,7 @@ export function CTA() {
               size="lg"
               className="px-8 py-3"
             >
-              浏览文章
+              Browse Articles
             </Button>
           </motion.div>
         </div>

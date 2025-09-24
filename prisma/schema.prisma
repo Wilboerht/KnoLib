@@ -1,0 +1,328 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String      @id @default(cuid())
+  email      String      @unique
+  password   String?     // 可选，第三方登录用户可能没有密码
+  name       String?
+  avatar     String?
+  bio        String?
+  role       Role        @default(AUTHOR)
+  isActive   Boolean     @default(true)
+  lastLogin  DateTime?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  articles   Article[]
+  mediaFiles MediaFile[]
+  accounts   Account[]   // NextAuth 账户关联
+  sessions   Session[]   // NextAuth 会话
+
+  @@map("users")
+}
+
+model Domain {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique
+  description String?
+  icon        String?
+  order       Int        @default(0)
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  articles    Article[]
+  categories  Category[]
+
+  @@map("domains")
+}
+
+model Category {
+  id            String        @id @default(cuid())
+  name          String
+  slug          String
+  description   String?
+  icon          String?
+  color         String?
+  order         Int           @default(0)
+  isActive      Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  domainId      String
+  articles      Article[]
+  domain        Domain        @relation(fields: [domainId], references: [id], onDelete: Cascade)
+  subcategories Subcategory[]
+
+  @@unique([domainId, slug])
+  @@map("categories")
+}
+
+model Subcategory {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String
+  description String?
+  icon        String?
+  color       String?
+  order       Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  categoryId  String
+  articles    Article[]
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, slug])
+  @@map("subcategories")
+}
+
+model Tag {
+  id            String            @id @default(cuid())
+  name          String            @unique
+  slug          String            @unique
+  description   String?
+  color         String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  articles      ArticleTag[]
+  techSolutions TechSolutionTag[]
+
+  @@map("tags")
+}
+
+model Article {
+  id            String        @id @default(cuid())
+  title         String
+  slug          String        @unique
+  excerpt       String?
+  content       String?
+  featuredImage String?
+  difficulty    Difficulty    @default(BEGINNER)
+  readTime      Int?
+  views         Int           @default(0)
+  featured      Boolean       @default(false)
+  published     Boolean       @default(false)
+  publishedAt   DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  authorId      String
+  domainId      String
+  categoryId    String?
+  subcategoryId String?
+  seo           ArticleSEO?
+  tags          ArticleTag[]
+  author        User          @relation(fields: [authorId], references: [id])
+  category      Category?     @relation(fields: [categoryId], references: [id])
+  domain        Domain        @relation(fields: [domainId], references: [id])
+  subcategory   Subcategory?  @relation(fields: [subcategoryId], references: [id])
+  codeExamples  CodeExample[]
+
+  @@map("articles")
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, tagId])
+  @@map("article_tags")
+}
+
+model CodeExample {
+  id          String  @id @default(cuid())
+  language    String
+  code        String
+  description String?
+  order       Int     @default(0)
+  articleId   String
+  article     Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@map("code_examples")
+}
+
+model ArticleSEO {
+  id                 String  @id @default(cuid())
+  metaTitle          String?
+  metaDescription    String?
+  metaKeywords       String?
+  ogTitle            String?
+  ogDescription      String?
+  ogImage            String?
+  twitterTitle       String?
+  twitterDescription String?
+  twitterImage       String?
+  articleId          String  @unique
+  article            Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@map("article_seo")
+}
+
+model MediaFile {
+  id         String   @id @default(cuid())
+  filename   String
+  key        String   @unique
+  url        String
+  mimeType   String
+  size       Int
+  width      Int?
+  height     Int?
+  bucket     String   @default("knolib")
+  uploadedBy String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  uploader   User     @relation(fields: [uploadedBy], references: [id])
+
+  @@map("media_files")
+}
+
+model TechCategory {
+  id            String         @id @default(cuid())
+  name          String         @unique
+  slug          String         @unique
+  description   String?
+  icon          String?
+  color         String?
+  order         Int            @default(0)
+  isActive      Boolean        @default(true)
+  isProtected   Boolean        @default(false)
+  password      String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  solutions     TechSolution[]
+
+  @@map("tech_categories")
+}
+
+model TechSolution {
+  id          String            @id @default(cuid())
+  title       String
+  slug        String            @unique
+  content     String
+  summary     String?
+  categoryId  String?
+  techStack   String[]          @default([])
+  projectType String?
+  difficulty  Difficulty        @default(INTERMEDIATE)
+  views       Int               @default(0)
+  published   Boolean           @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  tags        TechSolutionTag[]
+  category    TechCategory?     @relation(fields: [categoryId], references: [id])
+  viewLogs    ViewLog[]
+
+  @@map("tech_solutions")
+}
+
+model TechSolutionTag {
+  solutionId String
+  tagId      String
+  solution   TechSolution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+  tag        Tag          @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([solutionId, tagId])
+  @@map("tech_solution_tags")
+}
+
+model ViewLog {
+  id         String   @id @default(cuid())
+  solutionId String
+  userIp     String?
+  userAgent  String?
+  viewedAt   DateTime @default(now())
+  sessionId  String?
+  solution   TechSolution @relation(fields: [solutionId], references: [id], onDelete: Cascade)
+
+  @@map("view_logs")
+}
+
+model DailyStat {
+  id                 String   @id @default(cuid())
+  date               DateTime @unique @db.Date
+  totalSolutions     Int      @default(0)
+  publishedSolutions Int      @default(0)
+  totalViews         Int      @default(0)
+  newSolutions       Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("daily_stats")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  AUTHOR
+}
+
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+// NextAuth.js 模型
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// OAuth 提供商配置
+model OAuthProvider {
+  id           String  @id @default(cuid())
+  name         String  @unique // google, github, microsoft, wechat, alipay
+  displayName  String  // 显示名称
+  clientId     String?
+  clientSecret String?
+  enabled      Boolean @default(false)
+  order        Int     @default(0)
+  icon         String? // 图标 URL 或类名
+  color        String? // 主题色
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("oauth_providers")
+}

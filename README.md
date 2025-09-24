@@ -51,7 +51,6 @@ npm run dev
 src/
 ├── app/                    # Next.js App Router pages
 │   ├── about/             # About page
-│   ├── contact/           # Contact page
 │   ├── services/          # Services page
 │   ├── globals.css        # Global styles
 │   ├── layout.tsx         # Root layout
@@ -149,4 +148,4 @@ This project is licensed under the MIT License.
 
 ## 📞 Support
 
-For support, email support@knolib.com or visit our contact page.
+For support, email support@knolib.com.

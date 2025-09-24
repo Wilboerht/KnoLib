@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* DingTalk 字体定义 */
+/* DingTalk Font Definitions */
 @font-face {
   font-family: 'DingTalk-JinBu';
   src: url('/fonts/DingTalk Jinbu/DingTalk JinBuTi.ttf') format('truetype');
@@ -84,6 +84,7 @@
 /* Liquid Glasses Navigation Effects */
 .liquid-glass {
   background: rgba(255, 255, 255, 0.25);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow:
@@ -93,6 +94,7 @@
 
 .liquid-glass-dark {
   background: rgba(15, 23, 42, 0.25);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
@@ -113,6 +115,7 @@
 /* Enhanced glass morphism for mobile menu */
 .mobile-glass-menu {
   background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
   backdrop-filter: blur(24px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow:
@@ -123,6 +126,7 @@
 
 .mobile-glass-menu-dark {
   background: rgba(15, 23, 42, 0.3);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
   backdrop-filter: blur(24px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:

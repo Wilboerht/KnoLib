@@ -1,22 +1,100 @@
+"use client";
+
+import * as React from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { KnoLibIcon } from "@/components/ui/all-docs-icon";
 
-const footerNavigation = {
-  learning: [],
-  community: [],
-  resources: [],
-  link: [
-    { name: "Blog", href: "https://www.wilboerht.cn/" }
-  ],
-};
+interface FooterLink {
+  name: string;
+  href: string;
+}
+
+interface Domain {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+interface TechCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  icon?: string;
+  color?: string;
+  order: number;
+  isActive: boolean;
+  _count: {
+    solutions: number;
+  };
+}
+
+
 
 export function Footer() {
+  const [domains, setDomains] = React.useState<Domain[]>([]);
+  const [techCategories, setTechCategories] = React.useState<TechCategory[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  // Load domains and tech categories from API
+  React.useEffect(() => {
+    const loadData = async () => {
+      try {
+        // Load domains
+        const domainsResponse = await fetch('/api/domains');
+        const domainsResult = await domainsResponse.json();
+
+        if (domainsResult.success) {
+          setDomains(domainsResult.data);
+        }
+
+        // Load tech categories for Tech Solutions section
+        const techCategoriesResponse = await fetch('/api/tech-categories?isActive=true');
+        const techCategoriesResult = await techCategoriesResponse.json();
+
+        if (techCategoriesResult.success) {
+          // Sort by order and limit to top 6 categories for footer display
+          const sortedCategories = techCategoriesResult.data
+            .sort((a: TechCategory, b: TechCategory) => a.order - b.order)
+            .slice(0, 6);
+          setTechCategories(sortedCategories);
+        }
+
+      } catch (error) {
+        console.error('Failed to load footer data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // Generate Knowledge navigation links
+  const knowledgeLinks: FooterLink[] = domains.map(domain => ({
+    name: domain.name,
+    href: `/knowledge?domain=${domain.slug}`
+  }));
+
+  // Generate Tech Solutions navigation links from tech categories
+  const techSolutionsLinks: FooterLink[] = techCategories.map(category => ({
+    name: category.name,
+    href: `/tech-solutions/${category.slug}`
+  }));
+
+  const footerNavigation = {
+    knowledge: knowledgeLinks,
+    techSolutions: techSolutionsLinks,
+    link: [
+      { name: "Blog", href: "https://www.wilboerht.cn/" }
+    ],
+  };
   return (
     <footer className="bg-gray-50 dark:bg-slate-800 border-t border-gray-200 dark:border-slate-700 relative z-20">
       <Container>
         <div className="py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
@@ -62,50 +140,62 @@ export function Footer() {
 
             {/* Navigation Columns */}
             <div>
-              <h3 className="text-sm font-semibold text-foreground mb-4">Learning</h3>
+              <h3 className="text-sm font-semibold text-foreground mb-4">Knowledge</h3>
               <ul className="space-y-3">
-                {footerNavigation.learning.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {item.name}
-                    </Link>
+                {loading ? (
+                  <li>
+                    <span className="text-sm text-muted-foreground/60">
+                      Loading...
+                    </span>
                   </li>
-                ))}
+                ) : footerNavigation.knowledge.length > 0 ? (
+                  footerNavigation.knowledge.map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={item.href}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li>
+                    <span className="text-sm text-muted-foreground/60">
+                      No domains available
+                    </span>
+                  </li>
+                )}
               </ul>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-foreground mb-4">Community</h3>
+              <h3 className="text-sm font-semibold text-foreground mb-4">Tech Solutions</h3>
               <ul className="space-y-3">
-                {footerNavigation.community.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {item.name}
-                    </Link>
+                {loading ? (
+                  <li>
+                    <span className="text-sm text-muted-foreground/60">
+                      Loading...
+                    </span>
                   </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-semibold text-foreground mb-4">Resources</h3>
-              <ul className="space-y-3">
-                {footerNavigation.resources.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {item.name}
-                    </Link>
+                ) : footerNavigation.techSolutions.length > 0 ? (
+                  footerNavigation.techSolutions.map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={item.href}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li>
+                    <span className="text-sm text-muted-foreground/60">
+                      Coming Soon
+                    </span>
                   </li>
-                ))}
+                )}
               </ul>
             </div>
 

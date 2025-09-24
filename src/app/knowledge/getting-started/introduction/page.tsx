@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { DocLayout } from "@/components/docs/doc-layout";
-import { BookOpen, Users, Zap, Shield, Clock, Globe } from "lucide-react";
+// Icons imported but not used in current implementation
 
 const breadcrumbs = [
   { label: "Knowledge Base", href: "/knowledge" },
@@ -17,7 +17,14 @@ const tableOfContents = [
   { id: "getting-started", title: "Getting Started" }
 ];
 
-const features: any[] = [];
+interface Feature {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  benefits: string[];
+}
+
+const features: Feature[] = [];
 
 export default function IntroductionPage() {
   return (

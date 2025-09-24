@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, ChevronRight, BookOpen, Users, Code, Settings, Search, MessageSquare, HelpCircle } from "lucide-react";
+import { ChevronDown, ChevronRight, BookOpen, Search, MessageSquare, HelpCircle } from "lucide-react";
 
 interface NavItem {
   title: string;
@@ -122,13 +122,8 @@ export function DocSidebar({ className = "" }: DocSidebarProps) {
               <MessageSquare className="h-4 w-4 mr-2" />
               Community
             </Link>
-            <Link
-              href="/contact"
-              className="flex items-center px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-md transition-colors"
-            >
-              <HelpCircle className="h-4 w-4 mr-2" />
-              Support
-            </Link>
+
+
           </div>
         </div>
       </div>
