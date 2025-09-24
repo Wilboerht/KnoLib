@@ -257,7 +257,7 @@ function AdminDashboardContent() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                   >
-                    {section.disabled ? (
+                    {(section as any).disabled ? (
                       <div className="bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 p-6 opacity-60">
                         <div className="flex items-center justify-between mb-4">
                           <div className={`w-12 h-12 ${section.color} rounded-lg flex items-center justify-center`}>

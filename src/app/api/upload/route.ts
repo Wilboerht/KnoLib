@@ -212,12 +212,12 @@ export async function GET(request: NextRequest) {
     const offset = parseInt(searchParams.get('offset') || '0');
 
     // 处理用户ID
-    let userId = uploadedBy;
+    let userId: string | null = uploadedBy;
     if (uploadedBy === 'default-user-id' || uploadedBy === 'demo-user-id') {
       const defaultUser = await prisma.user.findFirst({
         where: { email: 'demo@knolib.com' }
       });
-      userId = defaultUser?.id;
+      userId = defaultUser?.id || null;
     }
 
     const mediaFiles = await MediaFileService.getMediaFiles({

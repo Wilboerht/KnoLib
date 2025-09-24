@@ -4,7 +4,7 @@
  * 提供前端调用后端 API 的封装函数
  */
 
-import { Article } from '@/data/articles';
+import { Article } from '@prisma/client';
 
 // API 响应类型
 interface ApiResponse<T> {

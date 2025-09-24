@@ -12,6 +12,14 @@ export const POST = withAuth(async (request) => {
   try {
     const body = await request.json();
     const { provider, providerAccountId, accessToken, refreshToken } = body;
+
+    if (!request.user) {
+      return NextResponse.json(
+        { success: false, error: '用户未认证' },
+        { status: 401 }
+      );
+    }
+
     const userId = request.user.id;
 
     // 验证必需字段
@@ -96,6 +104,13 @@ export const POST = withAuth(async (request) => {
 // GET /api/auth/link-account - 获取当前用户的关联账户
 export const GET = withAuth(async (request) => {
   try {
+    if (!request.user) {
+      return NextResponse.json(
+        { success: false, error: '用户未认证' },
+        { status: 401 }
+      );
+    }
+
     const userId = request.user.id;
 
     const accounts = await prisma.account.findMany({

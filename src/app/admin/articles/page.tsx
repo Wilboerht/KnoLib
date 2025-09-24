@@ -39,13 +39,12 @@ function ArticleAdminPageContent() {
 
   // Load article data
   const loadArticles = React.useCallback(async () => {
-    if (!isDevelopment) return;
 
     setLoading(true);
     setError(null);
 
     try {
-      const response = await ArticleAPI.getArticles({ published: undefined }); // Get all articles, including unpublished ones
+      const response = await ArticleAPI.getArticles({}); // Get all articles, including unpublished ones
 
       if (response.success && response.data) {
         setArticles(response.data);
@@ -88,7 +87,7 @@ function ArticleAdminPageContent() {
     } finally {
       setLoading(false);
     }
-  }, [isDevelopment]);
+  }, []);
 
   React.useEffect(() => {
     loadArticles();

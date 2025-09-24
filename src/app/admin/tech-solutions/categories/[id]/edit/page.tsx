@@ -182,11 +182,14 @@ export default function EditTechCategory({ params }: PageProps) {
 
     try {
       // Prepare data for submission
-      const submitData = { ...formData };
+      let submitData: any;
 
       // If password is the placeholder, don't send it (keep existing password)
       if (formData.password === "••••••••") {
-        delete submitData.password;
+        const { password, ...dataWithoutPassword } = formData;
+        submitData = dataWithoutPassword;
+      } else {
+        submitData = { ...formData };
       }
 
       const response = await fetch(`/api/tech-categories/${categoryId}`, {

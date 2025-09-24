@@ -332,6 +332,7 @@ export default function SolutionDetailPage({
         {showPasswordModal && (
           <CategoryPasswordModal
             categorySlug={resolvedParams.category}
+            categoryName={resolvedParams.category}
             onSuccess={handlePasswordSuccess}
             onCancel={handlePasswordCancel}
           />
@@ -489,7 +490,7 @@ export default function SolutionDetailPage({
                 prose-hr:mb-12 prose-hr:mt-12 prose-hr:border-gray-300 dark:prose-hr:border-gray-600">
                 <ReactMarkdown
                   components={{
-                    code({ node, inline, className, children, ...props }) {
+                    code({ node, inline, className, children, ...props }: any) {
                       const match = /language-(\w+)/.exec(className || '');
                       return !inline && match ? (
                         <SyntaxHighlighter

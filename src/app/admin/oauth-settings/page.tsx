@@ -104,7 +104,7 @@ export default function OAuthSettingsPage() {
             clientSecret: '',
             enabled: false,
             order: 0,
-            icon: defaultProvider.icon,
+            icon: defaultProvider.name,
             color: defaultProvider.color,
           };
         });
@@ -273,8 +273,8 @@ export default function OAuthSettingsPage() {
                           checked={provider.enabled}
                           onCheckedChange={(checked) => updateProvider(index, 'enabled', checked)}
                           disabled={editingProvider !== provider.name &&
-                                   provider.clientId && provider.clientId.trim() !== '' &&
-                                   provider.clientSecret && provider.clientSecret.trim() !== ''}
+                                   !!(provider.clientId && provider.clientId.trim() !== '' &&
+                                   provider.clientSecret && provider.clientSecret.trim() !== '')}
                         />
                         <Label>启用 {provider.displayName} 登录</Label>
                       </div>

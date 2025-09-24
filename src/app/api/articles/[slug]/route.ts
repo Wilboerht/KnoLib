@@ -8,9 +8,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ArticleService } from '@/lib/database/article-service';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // GET /api/articles/[slug] - 获取单个文章

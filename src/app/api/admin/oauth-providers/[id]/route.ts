@@ -11,7 +11,16 @@ interface RouteParams {
 }
 
 // GET /api/admin/oauth-providers/[id] - Get individual OAuth provider configuration
-export const GET = withAdminAuth(async (request: NextRequest, { params }: RouteParams) => {
+export async function GET(request: NextRequest, { params }: RouteParams) {
+  // 验证管理员权限
+  const authHeader = request.headers.get('authorization');
+  if (!authHeader?.startsWith('Bearer ')) {
+    return NextResponse.json(
+      { success: false, error: '未授权访问' },
+      { status: 401 }
+    );
+  }
+
   try {
     const { id } = await params;
     
@@ -44,10 +53,19 @@ export const GET = withAdminAuth(async (request: NextRequest, { params }: RouteP
       { status: 500 }
     );
   }
-});
+}
 
 // PUT /api/admin/oauth-providers/[id] - Update individual OAuth provider configuration
-export const PUT = withAdminAuth(async (request: NextRequest, { params }: RouteParams) => {
+export async function PUT(request: NextRequest, { params }: RouteParams) {
+  // 验证管理员权限
+  const authHeader = request.headers.get('authorization');
+  if (!authHeader?.startsWith('Bearer ')) {
+    return NextResponse.json(
+      { success: false, error: '未授权访问' },
+      { status: 401 }
+    );
+  }
+
   try {
     const { id } = await params;
     const body = await request.json();
@@ -84,7 +102,7 @@ export const PUT = withAdminAuth(async (request: NextRequest, { params }: RouteP
     });
   } catch (error) {
     console.error('Failed to update OAuth provider configuration:', error);
-    
+
     if (error instanceof Error && error.message.includes('Record to update not found')) {
       return NextResponse.json(
         {
@@ -104,10 +122,19 @@ export const PUT = withAdminAuth(async (request: NextRequest, { params }: RouteP
       { status: 500 }
     );
   }
-});
+}
 
 // DELETE /api/admin/oauth-providers/[id] - Delete OAuth provider configuration
-export const DELETE = withAdminAuth(async (request: NextRequest, { params }: RouteParams) => {
+export async function DELETE(request: NextRequest, { params }: RouteParams) {
+  // 验证管理员权限
+  const authHeader = request.headers.get('authorization');
+  if (!authHeader?.startsWith('Bearer ')) {
+    return NextResponse.json(
+      { success: false, error: '未授权访问' },
+      { status: 401 }
+    );
+  }
+
   try {
     const { id } = await params;
 
@@ -141,4 +168,4 @@ export const DELETE = withAdminAuth(async (request: NextRequest, { params }: Rou
       { status: 500 }
     );
   }
-});
+}

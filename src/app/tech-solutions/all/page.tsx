@@ -56,7 +56,7 @@ export default function AllTechSolutionsPage() {
             solutionsResult.data
               .filter((solution: TechSolution) => solution.category)
               .map((solution: TechSolution) => solution.category!.name)
-          )];
+          )] as string[];
           setCategories(uniqueCategories);
         }
       } catch (error) {
@@ -172,7 +172,7 @@ export default function AllTechSolutionsPage() {
                 </div>
                 <select
                   value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
+                  onChange={(e) => setSortBy(e.target.value as "category" | "title" | "newest")}
                   className="px-3 py-1 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
                   aria-label="Sort solutions by"
                 >

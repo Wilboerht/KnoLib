@@ -474,7 +474,7 @@ export class ArticleService {
   /**
    * 搜索文章
    */
-  static async searchArticles(options: GetArticlesOptions) {
+  static async searchArticles(options: any) {
     const {
       search,
       categoryId,

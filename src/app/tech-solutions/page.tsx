@@ -209,7 +209,7 @@ export default function TechSolutionsPage() {
                                 {category.name}
                               </h3>
                               {category.isProtected && (
-                                <Lock className="h-4 w-4 text-amber-500 flex-shrink-0" title="Password Protected" />
+                                <Lock className="h-4 w-4 text-amber-500 flex-shrink-0" />
                               )}
                             </div>
                             <p className="text-xs text-gray-500 dark:text-gray-400">

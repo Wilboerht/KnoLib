@@ -222,7 +222,7 @@ export default function CategoryPage({ params }: { params: Promise<{ category: s
                       {category.name}
                     </h1>
                     {category.isProtected && (
-                      <Lock className="h-5 w-5 text-amber-500" title="Password Protected" />
+                      <Lock className="h-5 w-5 text-amber-500" />
                     )}
                   </div>
                   {category.description && (

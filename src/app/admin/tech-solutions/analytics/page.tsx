@@ -188,7 +188,7 @@ export default function TechSolutionsAnalytics() {
         // Calculate real performance metrics
         const avgViewsPerSolution = current.totalSolutions > 0 ? Math.round(totalViews / current.totalSolutions) : 0;
         const topCategory = enhancedCategoryStats.length > 0
-          ? enhancedCategoryStats.reduce((prev, current) =>
+          ? enhancedCategoryStats.reduce((prev: any, current: any) =>
               (prev.views > current.views) ? prev : current
             )
           : { name: 'N/A', views: 0 };

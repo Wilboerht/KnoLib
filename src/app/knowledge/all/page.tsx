@@ -54,7 +54,7 @@ export default function AllArticlesPage() {
             articlesResult.data
               .filter((article: Article) => article.category)
               .map((article: Article) => article.category!.name)
-          )];
+          )] as string[];
           setCategories(uniqueCategories);
         }
       } catch (error) {

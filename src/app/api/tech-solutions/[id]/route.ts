@@ -38,7 +38,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     }
 
     // Check if the category is protected
-    const category = await TechCategoryService.getCategoryById(solution.categoryId);
+    const category = solution.categoryId ? await TechCategoryService.getCategoryById(solution.categoryId) : null;
 
     if (category && category.isProtected) {
       // For protected categories, we need to verify access

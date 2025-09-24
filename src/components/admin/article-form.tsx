@@ -63,22 +63,22 @@ export function ArticleForm({ onSubmit, initialData }: ArticleFormProps) {
     slug: initialData?.slug || "",
     category: typeof initialData?.category === 'string'
       ? initialData.category
-      : (initialData?.category?.name || ""),
+      : ((initialData?.category as any)?.name || ""),
     difficulty: initialData?.difficulty || "Beginner" as const,
-    description: initialData?.excerpt || initialData?.description || "",
+    description: (initialData as any)?.excerpt || initialData?.description || "",
     content: initialData?.content || "",
     readTime: initialData?.readTime || "5 min read",
     tags: Array.isArray(initialData?.tags)
       ? initialData.tags.map(tagItem => {
           if (typeof tagItem === 'string') return tagItem;
-          if (tagItem?.tag?.name) return tagItem.tag.name;
-          if (tagItem?.name) return tagItem.name;
+          if ((tagItem as any)?.tag?.name) return (tagItem as any).tag.name;
+          if ((tagItem as any)?.name) return (tagItem as any).name;
           return String(tagItem);
         })
       : [],
     domain: typeof initialData?.domain === 'string'
       ? initialData.domain
-      : (initialData?.domain?.name || ""),
+      : ((initialData?.domain as any)?.name || ""),
     featured: initialData?.featured || false,
     published: initialData?.published !== undefined ? initialData.published : true
   });
@@ -261,7 +261,7 @@ export function ArticleForm({ onSubmit, initialData }: ArticleFormProps) {
         category: formData.category,
         difficulty: formData.difficulty,
         href: `/knowledge/${formData.category.toLowerCase().replace(/\s+/g, '-')}/${formData.slug}`,
-        readTime: formData.readTime,
+        readTime: typeof formData.readTime === 'string' ? parseInt(formData.readTime) || 5 : formData.readTime,
         lastUpdated: new Date().toISOString().split('T')[0],
         author: "Wilboerht", // Fixed author name for personal knowledge sharing platform
         description: formData.description,
@@ -421,7 +421,7 @@ export function ArticleForm({ onSubmit, initialData }: ArticleFormProps) {
 
                         return <p {...props}>{children}</p>;
                       },
-                      code: ({ node, inline, className, children, ...props }) => {
+                      code: ({ node, inline, className, children, ...props }: any) => {
                         const match = /language-(\w+)/.exec(className || '');
                         return !inline && match ? (
                           <SyntaxHighlighter

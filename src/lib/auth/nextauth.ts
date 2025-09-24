@@ -163,8 +163,10 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       // 将用户信息添加到 session
       if (token) {
-        session.user.id = token.userId as string;
-        session.user.role = token.role as string;
+        if (session.user) {
+          (session.user as any).id = token.userId as string;
+          (session.user as any).role = token.role as string;
+        }
       }
       return session;
     },
@@ -229,9 +231,6 @@ export const authOptions: NextAuthOptions = {
         }
       }
     },
-    async signInError({ error }) {
-      console.error('登录错误:', error);
-    },
   },
   debug: process.env.NODE_ENV === 'development',
 };
@@ -241,6 +240,6 @@ export async function getAuthOptions(): Promise<NextAuthOptions> {
   const providers = await getEnabledProviders();
   return {
     ...authOptions,
-    providers,
+    providers: providers as any,
   };
 }

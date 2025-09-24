@@ -43,7 +43,10 @@ export default function KnowledgeManagement() {
       change: "+0",
       trend: 'neutral',
       icon: FileText,
-      href: "/admin/articles"
+      href: "/admin/articles",
+      color: "blue",
+      bgColor: "bg-blue-50",
+      description: "Total number of articles"
     },
     {
       title: "Categories",
@@ -51,7 +54,10 @@ export default function KnowledgeManagement() {
       change: "+0",
       trend: 'neutral',
       icon: FolderOpen,
-      href: "/admin/categories"
+      href: "/admin/categories",
+      color: "green",
+      bgColor: "bg-green-50",
+      description: "Total number of categories"
     },
     {
       title: "Tags",
@@ -59,7 +65,10 @@ export default function KnowledgeManagement() {
       change: "+0",
       trend: 'neutral',
       icon: Tag,
-      href: "/admin/tags"
+      href: "/admin/tags",
+      color: "purple",
+      bgColor: "bg-purple-50",
+      description: "Total number of tags"
     },
     {
       title: "Total Views",
@@ -67,6 +76,9 @@ export default function KnowledgeManagement() {
       change: "+0",
       trend: 'neutral',
       icon: Eye,
+      color: "orange",
+      bgColor: "bg-orange-50",
+      description: "Total page views"
     }
   ]);
 
@@ -106,7 +118,10 @@ export default function KnowledgeManagement() {
               }).length}`,
               trend: 'up',
               icon: FileText,
-              href: "/admin/articles"
+              href: "/admin/articles",
+              color: "blue",
+              bgColor: "bg-blue-50",
+              description: "Total number of articles"
             },
             {
               title: "Categories",
@@ -114,7 +129,10 @@ export default function KnowledgeManagement() {
               change: "+0",
               trend: 'neutral',
               icon: FolderOpen,
-              href: "/admin/categories"
+              href: "/admin/categories",
+              color: "green",
+              bgColor: "bg-green-50",
+              description: "Total number of categories"
             },
             {
               title: "Tags",
@@ -122,7 +140,10 @@ export default function KnowledgeManagement() {
               change: "+0",
               trend: 'neutral',
               icon: Tag,
-              href: "/admin/tags"
+              href: "/admin/tags",
+              color: "purple",
+              bgColor: "bg-purple-50",
+              description: "Total number of tags"
             },
             {
               title: "Total Views",
@@ -130,6 +151,9 @@ export default function KnowledgeManagement() {
               change: "+0",
               trend: 'neutral',
               icon: Eye,
+              color: "orange",
+              bgColor: "bg-orange-50",
+              description: "Total page views"
             }
           ]);
         }
